@@ -1,7 +1,8 @@
 
 include ../share/mixin
 
-mixin article-figure(article, width, showDate, showShare)
+mixin article-figure(article, width, showDate, showShare, balanceText)
+  - balanceClass = balanceText ? 'balance-text' : ''
   //- If the article data comes from metaphysics, it is already cropped
   //- so we can just reference the url property
   if article.get('thumbnail_image') && article.get('thumbnail_image').url
@@ -17,7 +18,7 @@ mixin article-figure(article, width, showDate, showShare)
         time.article-figure-date
           = article.date('published_at').format('MMMM Do')
 
-      a.article-figure-title( href= article.href() )
+      a.article-figure-title( href= article.href() class=balanceClass )
         = article.get('thumbnail_title')
 
       .article-figure-author-section

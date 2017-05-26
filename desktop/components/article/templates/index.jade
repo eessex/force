@@ -28,7 +28,7 @@ if superArticle
         +share-fixed((article.get('share_description') || article.get('thumbnail_title')), article.get('thumbnail_image'), article.fullHref())
 
     .article-header.responsive-layout-container
-      h1.large-garamond-header= article.get('title')
+      h1.large-garamond-header.balance-text= article.get('title')
       if article.strip('lead_paragraph')
         .article-lead-paragraph
           != article.get('lead_paragraph')

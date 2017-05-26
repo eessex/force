@@ -1,3 +1,4 @@
 include ../../article_figure/mixin
+- balanceText = balanceText || false
 
-+article-figure(article, (article.isTopTier() ? 600 : 400), true, true)
++article-figure(article, (article.isTopTier() ? 600 : 400), true, true, balanceText)

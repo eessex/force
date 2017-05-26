@@ -3182,6 +3182,10 @@ flickity@^2.0.5:
     tap-listener "^2.0.0"
     unidragger "^2.1.0"
 
+fontfaceobserver@^2.0.9:
+  version "2.0.9"
+  resolved "https://registry.yarnpkg.com/fontfaceobserver/-/fontfaceobserver-2.0.9.tgz#fb61e1053bd28d38cd4750a05b30f5130b32e97a"
+
 for-each@~0.3.2:
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/for-each/-/for-each-0.3.2.tgz#2c40450b9348e97f281322593ba96704b9abd4d4"
@@ -6951,6 +6955,10 @@ tar@^2.2.1:
     block-stream "*"
     fstream "^1.0.2"
     inherits "2"
+
+text-balancer@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/text-balancer/-/text-balancer-1.0.5.tgz#606b5a8cb941565df0cd841353cba520b856e884"
 
 text-table@~0.2.0:
   version "0.2.0"

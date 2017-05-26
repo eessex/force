@@ -2,6 +2,8 @@ _ = require 'underscore'
 sd = require('sharify').data
 Backbone = require 'backbone'
 imagesLoaded = require 'imagesloaded'
+textBalancer = require 'text-balancer'
+FontFaceObserver = require 'fontfaceobserver'
 CurrentUser = require '../../../models/current_user.coffee'
 Article = require '../../../models/article.coffee'
 Artist = require '../../../models/artist.coffee'
@@ -52,6 +54,7 @@ module.exports = class ArticleView extends Backbone.View
     @windowWidth = $(window).width()
     @windowHeight = $(window).height()
     @$articleContainer = $(".article-container[data-id=#{@article.get('id')}] .article-content")
+    @setupFonts()
 
     # Render sections
     @renderSlideshow()
@@ -89,6 +92,13 @@ module.exports = class ArticleView extends Backbone.View
 
   renderSlideshow: =>
     initCarousel @$('.js-article-carousel'), imagesLoaded: true
+
+  setupFonts: =>
+    font = new FontFaceObserver('Adobe Garamond W08')
+    font.load().then ->
+      textBalancer.balanceText()
+      $('.balance-text, .article-author-date').css('opacity', 1)
+
 
   embedMobileHeight: =>
     $('.article-section-container[data-section-type=embed]').each (i, embed) =>
@@ -354,6 +364,7 @@ module.exports = class ArticleView extends Backbone.View
               @sticky.rebuild()
               @setupWaypointUrls() if @waypointUrls
               @setupMobileShare()
+              @setupFonts()
             onClick: =>
               @sticky.rebuild()
               $.waypoints 'refresh'

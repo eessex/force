@@ -4,4 +4,4 @@ ul.grid-3-up
     li.grid-item
       a( href="/article/#{article.get('slug')}" )
         img( src=crop(article.get('thumbnail_image'), { height: 100, width: 100 }) )
-        p= article.get('thumbnail_title')
+        p.balance-text= article.get('thumbnail_title')

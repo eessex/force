@@ -45,7 +45,7 @@ mixin fullscreen(article)
     .main-layout-container.article-fullscreen-text
       .article-fullscreen-text-overlay
         if article.get('hero_section').title
-          h1.large-garamond-header.article-fullscreen-title= article.get('title')
+          h1.large-garamond-header.article-fullscreen-title.balance-text= article.get('title')
         if !article.get('is_super_article')
           +author-date
          if article.get('hero_section').intro
@@ -69,7 +69,7 @@ mixin callout(section)
 
 mixin pullquote(section)
   .article-section-callout
-    .article-section-callout__pullquote= section.text
+    .article-section-callout__pullquote.balance-text= section.text
 
 mixin toc(section)
   .article-section-toc-header Table Of Contents
