@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import { connect } from 'react-redux'
-import AuctionsBlock from 'desktop/apps/auctions2/components/auctions_block/AuctionsBlock'
+import AuctionsBlock from 'desktop/apps/auctions2/components/auctions_block/AuctionsBlock2'
 import { filter, reject } from 'underscore'
 
 function Layout ({ isMobile, auctions }) {
