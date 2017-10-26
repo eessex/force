@@ -29,7 +29,7 @@ export default class InfiniteScrollArticle extends React.Component {
       articles: [this.props.article],
       offset: 0,
       error: false,
-      following: setupFollows(),
+      following: setupFollows() || null,
       isEnabled: true
     }
   }

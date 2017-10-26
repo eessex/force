@@ -160,15 +160,19 @@ moment = require 'moment'
           }
         }
       ]
-    }
+    },
+    {
+      type: 'text',
+      body: '<h2><a href="https://www.artsy.net/artist/georgia-okeeffe" class="is-follow-link">Georgia O’Keeffe </a><a data-id="georgia-okeeffe" class="entity-follow artist-follow"></a></h2>',
+    },
     {
       type: 'text',
       body: 'Check out this video art:',
-    }
+    },
     {
       type: 'video',
       url: 'http://youtu.be/yYjLrJRuMnY'
-    }
+    },
     {
       type: 'image_collection'
       images: [
