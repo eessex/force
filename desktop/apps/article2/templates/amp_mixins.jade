@@ -1,7 +1,7 @@
 mixin amp_hero_section(hero)
   case hero.type
-    when 'image'
-      +amp_hero_image(hero.url, hero.caption)
+    //- when 'image'
+    //-   +amp_hero_image(hero.url, hero.caption)
     when 'fullscreen'
       if hero.url && hero.url.indexOf('mp4') > -1
         .amp-article__video-container
@@ -70,20 +70,6 @@ mixin amp_embed(section)
     .article-section-embed
       amp-iframe(src=section.url height="#{section.mobile_height || section.height}" width="300" layout="responsive" sandbox="allow-scripts allow-same-origin")
 
-mixin amp_callout(section)
-  .article-section-container.responsive-layout-container(data-section-type="callout")
-    if section.article && section.article.length > 0
-      .article-section-callout.amp-article__callout(data-id=section.article)
-        - var calloutArticle = calloutArticles.findWhere({id: section.article})
-        if calloutArticle
-          .related-title Related Article
-          a(class=(section.hide_image ? 'no-image' : '') href=(calloutArticle.href()))
-            if !section.hide_image
-              amp-img(width="120" height="80" src=crop(section.thumbnail_url ? section.thumbnail_url : calloutArticle.get('thumbnail_image'), { width: 120, height: 80 }))
-            .article-section-callout__title= section.text ? section.text : calloutArticle.get('thumbnail_title')
-    else if section.text && section.text.length > 0
-      +pullquote(section)
-
 mixin amp_analytics
   amp-analytics(type="segment")
     script(type="application/json").
@@ -116,7 +102,7 @@ mixin amp_head
   meta(charset='utf-8')
   title= article.get('search_title') || article.get('thumbnail_title')
   link(rel='canonical', href=article.fullHref())
-  link(type="text/css" rel="stylesheet" href="https://fast.fonts.net/cssapi/f7f47a40-b25b-44ee-9f9c-cfdfc8bb2741.css")
+  link(type='text/css' rel='stylesheet' href='#{sd.WEBFONT_URL}/force-webfonts.css?a=b')
   meta(name='viewport', content='width=device-width,minimum-scale=1,initial-scale=1')
   script(type='application/ld+json')
     != [jsonLD]
