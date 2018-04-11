@@ -30,6 +30,9 @@
       "plugins": [
         "react-hot-loader/babel"
       ]
+    },
+    "test": {
+      "plugins": ["babel-plugin-rewire"]
     }
   }
 }
