@@ -23,6 +23,8 @@ const SectionTitle = Title.extend`
 
 const IntroductionText = Text.extend`
   line-height: 31px;
+  margin-bottom: 20px;
+  color: ${colors.grayDark};
   @media (max-width: 24em) {
     font-size: 20px;
     line-height: 26px;
@@ -38,7 +40,9 @@ const FairLogo = styled.img`
 `
 
 const ResponsiveRow = styled(Row)`
-  @media (max-width: 48em) {
+  ${props =>
+    props.paddingBottom &&
+    `padding-bottom: ${props.paddingBottom}px;`} @media (max-width: 48em) {
     margin-left: -8px;
     margin-right: -8px;
   }
@@ -76,38 +80,33 @@ export const FairWeekPageScaffold = ({
 }) => (
   <ThemeProvider theme={theme}>
     <Container>
-      <ResponsiveRow style={{ paddingBottom: 50 }}>
+      <ResponsiveRow paddingBottom={50}>
         <Col lg={4} md={4} sm={12} xs={12}>
           <SectionTitle
             titleSize="large"
             dangerouslySetInnerHTML={{ __html: introduction.title }}
           />
         </Col>
+
         <Col lg={8} md={8} sm={12} xs={12}>
           <ReveredColumnOnMobile>
-            <IntroductionText
-              textSize="xlarge"
-              color={colors.grayDark}
-              style={{ marginBottom: 20 }}
-            >
+            <IntroductionText textSize="xlarge">
               {introduction.description}
             </IntroductionText>
-            <div>
-              <img
-                style={{ marginTop: 30, marginBottom: 20, maxWidth: '100%' }}
-                src={introduction.image}
-              />
-            </div>
+            <img
+              style={{ marginTop: 30, marginBottom: 20, maxWidth: '100%' }}
+              src={introduction.image}
+            />
           </ReveredColumnOnMobile>
         </Col>
       </ResponsiveRow>
 
-      <ResponsiveRow style={{ paddingBottom: 50 }}>
+      <ResponsiveRow paddingBottom={50}>
         <Col lg={4} md={4} sm={12} xs={12}>
           <SectionTitle titleSize="large">{fair_coverage.title}</SectionTitle>
         </Col>
         <Col lg={8} md={8} sm={12} xs={12}>
-          <ResponsiveRow style={{ marginBottom: 20 }}>
+          <ResponsiveRow paddingBottom={20}>
             {fair_coverage.fairs.map(fair => (
               <Col lg={3} md={3} sm={3} xs={6} key={fair.logo_url}>
                 {fair.site_url && fair.site_url.startsWith('http') ? (
@@ -123,7 +122,7 @@ export const FairWeekPageScaffold = ({
         </Col>
       </ResponsiveRow>
 
-      <ResponsiveRow style={{ paddingBottom: 45 }}>
+      <ResponsiveRow paddingBottom={45}>
         <Col lg={4} md={4} sm={12} xs={12}>
           <SectionTitle titleSize="large">{event.title}</SectionTitle>
         </Col>
@@ -156,7 +155,7 @@ export const FairWeekPageScaffold = ({
         </Col>
         <Col lg={8} md={8} sm={12} xs={12}>
           {prepare_for_fairs.articles.map(article => (
-            <ResponsiveRow style={{ marginBottom: 25 }} key={article.title}>
+            <ResponsiveRow paddingnBottom={25} key={article.title}>
               <Col lg={7} md={7} sm={6} xs={12}>
                 <a href={article.article_url} target="_blank">
                   <img
