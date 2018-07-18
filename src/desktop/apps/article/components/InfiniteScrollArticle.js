@@ -154,8 +154,6 @@ export default class InfiniteScrollArticle extends React.Component {
               isMobile={this.props.isMobile}
               emailSignupUrl={this.props.emailSignupUrl}
               display={article.display}
-              headerHeight={i === 0 ? this.props.headerHeight : null}
-              marginTop={i === 0 ? this.props.marginTop : null}
               showTooltips={showTooltips}
               onOpenAuthModal={onOpenAuthModal}
               renderTime={renderTimes[Math.floor(i / 3)]}
@@ -185,8 +183,9 @@ export const LoadingSpinner = styled.div`
   position: relative;
   padding: 100px;
 `
+
 export const Break = styled.div`
-  border-top: 1px solid ${colors.grayRegular};
+  border-top: 1px solid rgb(229, 229, 229);
   width: 100%;
-  margin-top: 80px;
+  margin-bottom: 80px;
 `
