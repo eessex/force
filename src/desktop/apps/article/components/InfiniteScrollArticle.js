@@ -3,20 +3,21 @@ import _ from 'underscore'
 import PropTypes from 'prop-types'
 import Waypoint from 'react-waypoint'
 import styled from 'styled-components'
-import colors from 'reaction/Assets/Colors'
 import { data as sd } from 'sharify'
 import { positronql as _positronql } from 'desktop/lib/positronql'
 import { Article } from 'reaction/Components/Publishing'
 import { articlesQuery } from 'desktop/apps/article/queries/articles'
 import { setupFollows, setupFollowButtons } from './FollowButton.js'
 import { getCurrentUnixTimestamp } from 'reaction/Components/Publishing/Constants'
+import _EditorialSignupView from 'desktop/components/email/client/editorial_signup.coffee'
 
 // FIXME: Rewire
 let positronql = _positronql
+let EditorialSignupView = _EditorialSignupView
 
 const FETCH_TOP_OFFSET = 200
 
-export default class InfiniteScrollArticle extends React.Component {
+export class InfiniteScrollArticle extends React.Component {
   static propTypes = {
     article: PropTypes.object,
     emailSignupUrl: PropTypes.string,
@@ -41,6 +42,13 @@ export default class InfiniteScrollArticle extends React.Component {
   }
 
   componentDidMount() {
+    const { article, isSuper } = this.props
+
+    if (!isSuper && article.layout === 'standard') {
+      new EditorialSignupView({
+        el: document.querySelector('body'),
+      })
+    }
     setupFollowButtons(this.state.following)
   }
 

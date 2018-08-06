@@ -5,12 +5,11 @@ import ReactDOM from 'react-dom'
 import { Article } from 'reaction/Components/Publishing'
 import { ContextProvider } from 'reaction/Components/Artsy'
 import { InfiniteScrollNewsArticle } from './InfiniteScrollNewsArticle.tsx'
+import { InfiniteScrollArticle } from './InfiniteScrollArticle'
 import { EditButton } from 'desktop/apps/article/components/EditButton'
-import _ArticleLayout from './layouts/Article'
+import { StaticArticle } from './layouts/StaticArticle'
 import { data as sd } from 'sharify'
-
-// FIXME: Rewire
-let ArticleLayout = _ArticleLayout
+import mediator from 'desktop/lib/mediator.coffee'
 
 export default hot(module)(
   class App extends React.Component {
@@ -18,8 +17,18 @@ export default hot(module)(
       article: PropTypes.object,
     }
 
+    handleOpenAuthModal = (mode, options) => {
+      mediator.trigger('open:auth', {
+        mode,
+        ...options,
+      })
+    }
+
     getArticleLayout = () => {
-      const { article } = this.props
+      const { article, isSuper } = this.props
+      const isExperimentInfiniteScroll =
+        sd.ARTICLE_INFINITE_SCROLL === 'experiment'
+      const hasNav = isSuper || article.seriesArticle
 
       switch (article.layout) {
         case 'video': {
@@ -44,8 +53,31 @@ export default hot(module)(
             <InfiniteScrollNewsArticle articles={[article]} {...this.props} />
           )
         }
+        case 'standard':
+        case 'feature': {
+          if (isExperimentInfiniteScroll || hasNav) {
+            return (
+              <StaticArticle
+                onOpenAuthModal={this.handleOpenAuthModal}
+                {...this.props}
+              />
+            )
+          } else {
+            return (
+              <InfiniteScrollArticle
+                onOpenAuthModal={this.handleOpenAuthModal}
+                {...this.props}
+              />
+            )
+          }
+        }
         default: {
-          return <ArticleLayout {...this.props} />
+          return (
+            <InfiniteScrollArticle
+              onOpenAuthModal={this.handleOpenAuthModal}
+              {...this.props}
+            />
+          )
         }
       }
     }
@@ -57,7 +89,7 @@ export default hot(module)(
         <Fragment>
           <EditPortal article={article} />
           <ContextProvider currentUser={sd.CURRENT_USER}>
-            {this.getArticleLayout()}
+            <div>{this.getArticleLayout()}</div>
           </ContextProvider>
         </Fragment>
       )
