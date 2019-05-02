@@ -4,7 +4,7 @@ set -ex
 
 #trap "exit" INT
 
-nyc mocha \
+nyc --no-cache mocha \
   -c \
   --require test.config.js \
   --require mocha.config.js \
