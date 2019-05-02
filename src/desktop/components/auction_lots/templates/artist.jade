@@ -22,6 +22,6 @@ include ../../../../../node_modules/artsy-ezel-components/pagination/paginator
           a( href="?sort=#{v}" )= k
 
 table.auction-lots-table
-  include ./auction_lots_table
+  include ./auction_lots_table.jade
 
 +paginate(auctionLots.state.currentPage, auctionLots.state.totalPages, '?sort=' + auctionLots.sortBy + '&')
