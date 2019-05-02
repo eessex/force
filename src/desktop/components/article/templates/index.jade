@@ -1,4 +1,4 @@
-include ../../article_figure/mixin
+include ../../article_figure/mixin.jade
 include ./share.jade
 include ./mixins.jade
 
@@ -35,7 +35,7 @@ include ./mixins.jade
       //- Article body content
       if article.get('sections').length && article.get('sections')[0].type == 'slideshow'
         .article-carousel
-          include carousel
+          include ./carousel.jade
 
     for section, i in article.get('sections')
       .article-section-container.responsive-layout-container( data-layout=section.layout, data-section-type=section.type )

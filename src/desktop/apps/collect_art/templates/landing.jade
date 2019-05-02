@@ -1,10 +1,10 @@
-extends ../../../components/main_layout/templates/blank
+extends ../../../components/main_layout/templates/blank.jade
 
 append locals
   - assetPackage = 'collect_art'
 
 block head
-  include meta
+  include ./meta.jade
 
 block body
   .collect-art-header( style="background-image: url(#{header.image});" )

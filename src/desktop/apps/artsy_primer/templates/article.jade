@@ -7,10 +7,10 @@ append locals
 block head
 
 block body
-  include header.jade
+  include ./header.jade
 
   .artsy-primer-article
-    include ../../../components/article/templates/index
+    include ../../../components/article/templates/index.jade
 
   .responsive-layout-container: .mlf.mlf__fullwidth
-    include ../../../components/main_layout/footer/lower
+    include ../../../components/main_layout/footer/lower.jade

@@ -1,6 +1,6 @@
-extends ./template
+extends ./template.jade
 
-include ../../../components/bordered_pulldown/mixin
+include ../../../components/bordered_pulldown/mixin.jade
 
 block content
   section.sg-components
@@ -69,7 +69,7 @@ block content
             a( href='#' ) #{i++}
       pre: code
         | # Stylesheet: @import '../components/bordered_pulldown'
-        | # Mixin: include ../../../components/bordered_pulldown/mixin
+        | # Mixin: include ../../../components/bordered_pulldown/mixin.jade
       pre: code
         | # Arguments: defaultVal, label (optional)
         | +bordered-scrollable-pulldown('Current Selection', 'Filter by:')

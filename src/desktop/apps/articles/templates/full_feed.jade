@@ -26,11 +26,11 @@
     .articles-feed-articles.js-articles-feed-articles
       for article in articles.feed()
         .articles-feed-item( data-tier= article.get('tier') )
-          include ../../../components/articles_feed/templates/article
+          include ../../../components/articles_feed/templates/article.jade
 
     .js-articles-feed-more
-      include ../../../components/articles_feed/templates/button
+      include ../../../components/articles_feed/templates/button.jade
 
   if section && section.get('slug') == sd.GALLERY_INSIGHTS_SLUG
     .articles-insights-section.main-layout-container
-      include ../../../components/email/templates/gallery_insights_form
+      include ../../../components/email/templates/gallery_insights_form.jade

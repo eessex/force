@@ -1,4 +1,4 @@
-extends ../../../components/layout/templates/scaffold
+extends ../../../components/layout/templates/scaffold.jade
 
 block body
   #auth-page
@@ -6,4 +6,4 @@ block body
     .auth-page-error-message
       if error
         = error
-    include signup_form
+    include ./signup_form.jade

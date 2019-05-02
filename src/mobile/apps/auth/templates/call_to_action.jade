@@ -1,4 +1,4 @@
-extends ../../../components/layout/templates/scaffold
+extends ../../../components/layout/templates/scaffold.jade
 
 block body
   #auth-page
@@ -31,6 +31,6 @@ block body
       ) Log in
     ul#auth-call-to-action-forms
       li(class=sd.CURRENT_PATH.includes(sd.AP.signupPagePath) ? 'auth-call-to-action-form-active' : '')
-        include signup_buttons
+        include ./signup_buttons.jade
       li(class=sd.CURRENT_PATH.includes(sd.AP.loginPagePath) ? 'auth-call-to-action-form-active' : '')
-        include login_form
+        include ./login_form.jade

@@ -5,13 +5,13 @@ block body
   #content
     block banner
       if showMarketingSignupModal
-        include ../../marketing_signup_modal/index
+        include ../../marketing_signup_modal/index.jade
       else
         mixin login-signup("Header")
 
     header#main-header
       nav.main-dropdown-menu.js-main-dropdown-menu
-        include ../../main_dropdown_menu/template
+        include ../../main_dropdown_menu/template.jade
 
       nav.main-header-nav
         a#main-header-logo( href= '/' )
@@ -28,4 +28,4 @@ block body
     main
       block content
 
-    include footer
+    include ./footer.jade

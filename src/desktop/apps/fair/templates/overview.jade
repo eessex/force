@@ -1,7 +1,7 @@
-extends ../../../components/fair_layout/templates/index
+extends ../../../components/fair_layout/templates/index.jade
 
 block coverImage
-  include fair_cover_image
+  include ./fair_cover_image.jade
 
 block icon
   .fair-overview-icon-spacer
@@ -15,4 +15,4 @@ block body
   .for-you-container
   h2.overview-section-heading Browse the fair
   .fair-page-content.main-layout-container
-    include ../components/browse/template
+    include ../components/browse/template.jade

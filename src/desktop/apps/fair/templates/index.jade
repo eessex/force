@@ -1,4 +1,4 @@
-extends ../../../components/fair_layout/templates/index
+extends ../../../components/fair_layout/templates/index.jade
 
 block head
   if sd.SECTION == 'info'
@@ -18,12 +18,12 @@ block body
       include ./search_results.jade
     else if sd.SECTION == 'browse'
       #fair-browse-spacer
-      include ../components/browse/template
+      include ../components/browse/template.jade
     else if sd.SECTION == 'forYou'
       include ./for_you.jade
   .fair-page-footer
 
-  include ../../../components/main_layout/templates/json_ld
+  include ../../../components/main_layout/templates/json_ld.jade
 
 
-extends ../../../components/fair_layout/templates/index
+extends ../../../components/fair_layout/templates/index.jade

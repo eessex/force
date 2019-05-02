@@ -1,10 +1,10 @@
-extends ../../../components/layout/templates/scaffold
+extends ../../../components/layout/templates/scaffold.jade
 
 block body
   #auth-page
     h1.avant-garde-header-center Sign up using
     if error
       .auth-page-error-message= error
-    include signup_buttons
+    include ./signup_buttons.jade
     p.auth-page-nevermind Already have an account?&nbsp;
       a( href='/log_in' + (redirectTo ? '?redirectTo=#{redirectTo}' : '' )) Log in

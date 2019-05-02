@@ -7,16 +7,16 @@ block locals
 doctype html
 html( data-useragent= userAgent lang="en")
   head
-    include head
+    include ./head.jade
     block head
     link( type='text/css', rel='stylesheet', href=asset('/assets/main_layout.css') )
     if assetPackage
       link( type='text/css', rel='stylesheet', href=asset('/assets/#{assetPackage}.css') )
 
   body( class=bodyClass )
-    include ../header/templates/minimal_header
-    include ../../modal/template
-    include ../../flash/template
+    include ../header/templates/minimal_header.jade
+    include ../../modal/template.jade
+    include ../../flash/template.jade
 
     #main-layout-container
       block body
@@ -24,7 +24,7 @@ html( data-useragent= userAgent lang="en")
     #scripts
       //- Don't replace this block, rather prepend or append!
       block scripts
-        include scripts
+        include ./scripts.jade
 
         script( src= asset('/assets/main_layout.js') )
 
