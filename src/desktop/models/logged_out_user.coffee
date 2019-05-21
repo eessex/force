@@ -58,7 +58,7 @@ module.exports = class LoggedOutUser extends User
 
   login: (options = {}) ->
     new Backbone.Model()
-      .save @pick('email', 'password', '_csrf'), _.extend {}, options,
+      .save @pick('email', 'password', '_csrf', 'recaptcha_token'), _.extend {}, options,
         url: "#{APP_URL}#{sd.AP.loginPagePath}"
         success: _.wrap options.success, (success, model, response, options) =>
           @__isLoggedIn__ = true
@@ -78,6 +78,7 @@ module.exports = class LoggedOutUser extends User
         'signupIntent',
         'signupReferer',
         'accepted_terms_of_service',
+        'recaptcha_token',
         'agreed_to_receive_emails'
       ), _.extend {}, options,
         url: "#{APP_URL}#{sd.AP.signupPagePath}"
