@@ -29,7 +29,6 @@ import {
 import cheerio from "cheerio"
 import React from "react"
 import { ArticleMeta } from "@artsy/reaction/dist/Components/Publishing/ArticleMeta"
-
 const Articles = require("desktop/collections/articles.coffee")
 const markdown = require("desktop/components/util/markdown.coffee")
 const { crop, resize } = require("desktop/components/resizer/index.coffee")

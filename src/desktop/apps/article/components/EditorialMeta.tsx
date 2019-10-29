@@ -3,7 +3,7 @@ import { ArticleData } from "@artsy/reaction/dist/Components/Publishing/Typings"
 import { crop } from "@artsy/reaction/dist/Utils/resizer"
 import { getFullEditorialHref } from "@artsy/reaction/dist/Components/Publishing/Constants"
 
-export const EditorialMeta: React.SFC<{
+export const ArticleMeta: React.SFC<{
   article: ArticleData
   customMetaContent: ArticleData
   sd: any // TODO: type me
