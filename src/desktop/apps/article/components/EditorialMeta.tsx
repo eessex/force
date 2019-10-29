@@ -6,8 +6,10 @@ import { getFullEditorialHref } from "@artsy/reaction/dist/Components/Publishing
 export const EditorialMeta: React.SFC<{
   article: ArticleData
   customMetaContent: ArticleData
+  sd: any // TODO: type me
 }> = props => {
-  const article = props.customMetaContent || props.article
+  const { sd, customMetaContent } = props
+  const article = customMetaContent || props.article
   const title = article.search_title || article.thumbnail_title || ""
   const titleExtension = article.layout === "news" ? "Artsy News" : "Artsy"
   const url = getFullEditorialHref(article.layout, article.slug)
@@ -17,7 +19,7 @@ export const EditorialMeta: React.SFC<{
   const socialImage = article.social_image || article.thumbnail_image
   const authors = article.authors || article.contributing_authors || []
   const keywords = (article.keywords && article.keywords.join(", ")) || ""
-  const sailthruKeywords = ["article", keywords]
+  const sailthruKeywords = [`article${keywords && `, ${keywords}`}`]
   const emailMetadata = article.published && article.email_metadata
 
   if (article.featured) {
@@ -45,13 +47,7 @@ export const EditorialMeta: React.SFC<{
       <meta property="og:published_time" content={article.published_at} />
       <meta property="og:description" content={socialDescription} />
       <meta property="og:image" content={socialImage} />
-      <meta
-        property="fb:app_id"
-        content={
-          // @ts-ignore
-          props.locals.sharify.data.FACEBOOK_ID
-        }
-      />
+      <meta property="fb:app_id" content={sd.FACEBOOK_ID} />
       <meta property="article:published_time" content={article.published_at} />
       <meta
         property="article:publisher"
@@ -107,16 +103,12 @@ export const EditorialMeta: React.SFC<{
       )}
 
       {authors.map(
-        author => author.name && <meta name="author" content={author.name} />
+        (author, i) =>
+          author.name && <meta key={i} name="author" content={author.name} />
       )}
       {!article.indexable && <meta name="robots" content="noindex" />}
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <style>
-        {
-          // @ts-ignore
-          props.locals.sharify.data.RESPONSIVE_CSS
-        }
-      </style>
+      <style>{sd.RESPONSIVE_CSS}</style>
     </>
   )
 }

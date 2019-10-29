@@ -28,6 +28,7 @@ import {
 } from "./helpers"
 import cheerio from "cheerio"
 import { EditorialMeta } from "./components/EditorialMeta"
+import React from "react"
 
 const Articles = require("desktop/collections/articles.coffee")
 const markdown = require("desktop/components/util/markdown.coffee")
@@ -139,7 +140,14 @@ export const index = async (req, res, next) => {
         styledComponents: true,
       },
       blocks: {
-        head: EditorialMeta,
+        head: () => (
+          <EditorialMeta
+            sd={res.locals.sd}
+            article={article}
+            customMetaContent={customMetaContent}
+          />
+        ),
+        // head: () => (<EditorialMeta sd={res.locals.sd} article={article}/>),
         body: App,
       },
       locals: {
