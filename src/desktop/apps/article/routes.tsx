@@ -27,8 +27,8 @@ import {
   getSuperArticleTemplates,
 } from "./helpers"
 import cheerio from "cheerio"
-import { EditorialMeta } from "./components/EditorialMeta"
 import React from "react"
+import { ArticleMeta } from "@artsy/reaction/dist/Components/Publishing/ArticleMeta"
 
 const Articles = require("desktop/collections/articles.coffee")
 const markdown = require("desktop/components/util/markdown.coffee")
@@ -141,13 +141,12 @@ export const index = async (req, res, next) => {
       },
       blocks: {
         head: () => (
-          <EditorialMeta
+          <ArticleMeta
             sd={res.locals.sd}
             article={article}
             customMetaContent={customMetaContent}
           />
         ),
-        // head: () => (<EditorialMeta sd={res.locals.sd} article={article}/>),
         body: App,
       },
       locals: {
@@ -160,7 +159,6 @@ export const index = async (req, res, next) => {
       data: {
         article,
         customEditorial,
-        customMetaContent,
         isSuper,
         isLoggedIn,
         isMobile,
