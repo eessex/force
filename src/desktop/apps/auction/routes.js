@@ -1,8 +1,6 @@
 import * as actions from "desktop/apps/auction/actions/artworkBrowser"
 import App from "desktop/apps/auction/components/App"
-import Articles from "desktop/collections/articles.coffee"
 import ArticlesQuery from "desktop/apps/auction/queries/articles"
-import Auction from "desktop/models/auction.coffee"
 import MeQuery from "desktop/apps/auction/queries/me"
 import React from "react"
 import SaleQuery from "desktop/apps/auction/queries/sale"
@@ -10,12 +8,14 @@ import auctionReducer from "desktop/apps/auction/reducers"
 import configureStore from "desktop/components/react/utils/configureStore"
 import footerItems from "desktop/apps/auction/utils/footerItems"
 import { get } from "lodash"
-import _metaphysics from "lib/metaphysics.coffee"
 import u from "updeep"
 import { initialState as appInitialState } from "desktop/apps/auction/reducers/app"
 import { initialState as auctionWorksInitialState } from "desktop/apps/auction/reducers/artworkBrowser"
 import { getLiveAuctionUrl } from "utils/domain/auctions/urls"
 import { stitch as _stitch } from "@artsy/stitch"
+const Articles = require("desktop/collections/articles.coffee")
+const Auction = require("desktop/models/auction.coffee")
+const _metaphysics = require("lib/metaphysics.coffee")
 
 // FIXME: Metaphysics
 let metaphysics = _metaphysics

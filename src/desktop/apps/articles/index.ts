@@ -1,8 +1,8 @@
 import express from "express"
 import * as routes from "./routes"
-import { crop, resize } from "desktop/components/resizer/index.coffee"
 import { toSentence } from "underscore.string"
 import { data as sd } from "sharify"
+const { crop, resize } = require("desktop/components/resizer/index.coffee")
 
 export const app = express()
 

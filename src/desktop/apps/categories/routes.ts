@@ -1,9 +1,9 @@
 import App from "./components/App"
 import GeneFamiliesQuery from "./queries/geneFamilies"
 import FeaturedGenesQuery from "./queries/featuredGenes"
-import _metaphysics from "lib/metaphysics.coffee"
 import { stitch as _stitch } from "@artsy/stitch"
 import { geneFamiliesFromConnection } from "./utils"
+const _metaphysics = require("lib/metaphysics.coffee")
 
 // FIXME: Rewire
 let metaphysics = _metaphysics

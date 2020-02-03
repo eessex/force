@@ -1,6 +1,4 @@
 import React from "react"
-import Cookies from "cookies-js"
-import ReactDOM from "react-dom"
 import { init, initModalManager } from "../index"
 import { data as sd } from "sharify"
 import { AuthStatic } from "../../components/AuthStatic"
@@ -8,28 +6,35 @@ import { MobileAuthStatic } from "../../components/MobileAuthStatic"
 import { ModalContainer } from "../../components/ModalContainer"
 
 jest.mock("cookies-js")
-jest.mock("react-dom")
 jest.mock("sharify")
+jest.mock("react-dom", () => ({
+  hydrate: jest.fn(),
+  render: jest.fn(),
+}))
+const hydrateMock = require("react-dom").hydrate as jest.Mock
+const renderMock = require("react-dom").render as jest.Mock
+const cookieMock = require("cookies-js").set as jest.Mock
 
 describe("Auth client", () => {
   beforeEach(() => {
-    Cookies.set = jest.fn()
+    cookieMock.mockClear()
+    hydrateMock.mockClear()
   })
 
   describe("#init", () => {
     beforeEach(() => {
+      // @ts-ignore
       global.document.getElementById = jest.fn(() => <div id="react-root" />)
       window.__BOOTSTRAP__ = {
         options: {
           destination: "/foo",
         },
       }
-      ReactDOM.hydrate = jest.fn()
     })
 
     it("Returns AuthStatic by default", () => {
       init()
-      const component = ReactDOM.hydrate.mock.calls[0][0]
+      const component = hydrateMock.mock.calls[0][0]
 
       expect(component.type).toBe(AuthStatic)
     })
@@ -37,14 +42,15 @@ describe("Auth client", () => {
     it("Returns MobileAuthStatic if sd.IS_MOBILE", () => {
       sd.IS_MOBILE = true
       init()
-      const component = ReactDOM.hydrate.mock.calls[0][0]
+      const component = hydrateMock.mock.calls[0][0]
 
       expect(component.type).toBe(MobileAuthStatic)
     })
 
     it("calls #setCookies", () => {
       init()
-      const cookie = Cookies.set.mock.calls[0]
+      const cookieMock = require("cookies-js").set as jest.Mock
+      const cookie = cookieMock.mock.calls[0]
 
       expect(cookie[0]).toBe("destination")
       expect(cookie[1]).toMatch("/foo")
@@ -54,15 +60,15 @@ describe("Auth client", () => {
 
   describe("#initModalManager", () => {
     beforeEach(() => {
+      // @ts-ignore
       global.document.getElementById = jest.fn(() => (
         <div id="react-modal-container" />
       ))
-      ReactDOM.render = jest.fn()
     })
 
     it("Sets up the modal container", () => {
       initModalManager()
-      const component = ReactDOM.render.mock.calls[0][0]
+      const component = renderMock.mock.calls[0][0]
 
       expect(component.type).toBe(ModalContainer)
     })

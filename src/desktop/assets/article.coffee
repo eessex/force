@@ -9,5 +9,5 @@ $ ->
       { init } = require('../apps/article/client/classic.js')
       init()
     else
-      { init } = require('../apps/article/client/article.js')
+      { init } = require('../apps/article/client/article.tsx')
       init()

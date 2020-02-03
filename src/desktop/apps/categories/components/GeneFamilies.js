@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 
 import GeneFamily from "./GeneFamily"
-import { featuredGenesForFamily } from "../utils.js"
+import { featuredGenesForFamily } from "../utils"
 
 const propTypes = {
   geneFamilies: PropTypes.array.isRequired,

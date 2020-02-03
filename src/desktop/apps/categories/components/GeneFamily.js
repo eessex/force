@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import styled from "styled-components"
 
 import Gene from "./Gene"
-import { alphabetizeGenes } from "../utils.js"
+import { alphabetizeGenes } from "../utils"
 import FeaturedGenes from "./FeaturedGenes"
 
 const propTypes = {
@@ -37,7 +37,9 @@ const GeneFamily = ({ id, name, genes, featuredGenes }) => {
       <GeneFamilyName>{name}</GeneFamilyName>
       <FeaturedGenes featuredGenes={featuredGenes} />
       <GeneList>
-        {sortedGenes.map(gene => <Gene key={gene.id} {...gene} />)}
+        {sortedGenes.map(gene => (
+          <Gene key={gene.id} {...gene} />
+        ))}
       </GeneList>
     </div>
   )

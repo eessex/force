@@ -4,7 +4,7 @@ import App from "desktop/apps/auctions2/components/App"
 import auctionsReducer from "desktop/apps/auctions2/reducers"
 import configureStore from "desktop/components/react/utils/configureStore"
 
-export default () => {
+export const init = () => {
   const bootstrapData = window.__BOOTSTRAP__
 
   const store = configureStore(auctionsReducer, {

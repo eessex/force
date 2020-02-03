@@ -6,7 +6,7 @@ import configureStore from "desktop/components/react/utils/configureStore"
 import { initialState as appInitialState } from "desktop/apps/auctions2/reducers/appReducer"
 import { stitch } from "@artsy/stitch"
 
-export async function index(req, res, next) {
+export async function index(_req, res, next) {
   const store = configureStore(auctionsReducer, {
     app: appInitialState,
   })

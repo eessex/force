@@ -1,4 +1,3 @@
-import * as _ from "underscore"
 import { stitch } from "@artsy/stitch"
 import { App } from "desktop/apps/personalize/components/App"
 
@@ -32,7 +31,7 @@ export const index = async (req, res, next) => {
   }
 }
 
-export const ensureLoggedInUser = (req, res, next) => {
+export const ensureLoggedInUser = (_req, res, next) => {
   if (!res.locals.sd.CURRENT_USER) return res.redirect("/personalize")
   next()
 }

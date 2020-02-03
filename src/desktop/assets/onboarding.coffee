@@ -1,2 +1,2 @@
 $ ->
-  require('../apps/personalize/client/onboarding.js').init()
+  require('../apps/personalize/client/onboarding.tsx').init()

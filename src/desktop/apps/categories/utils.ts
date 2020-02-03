@@ -1,10 +1,10 @@
-import _ from "underscore"
+import { find, sortBy } from "lodash"
 
 export const alphabetizeGenes = genes =>
-  _.sortBy(genes, gene => gene.display_name || gene.name)
+  sortBy(genes, gene => gene.display_name || gene.name)
 
 export const featuredGenesForFamily = (familyName, featuredGenesList) => {
-  return _.find(
+  return find(
     featuredGenesList,
     featuredGenesFamily => featuredGenesFamily.name === familyName
   )

@@ -7,7 +7,7 @@ routes =
 
   '''
   /auctions2
-  ''': require('../apps/auctions2/client.js').default
+  ''': require('../apps/auctions2/client.tsx').init
 
   # TODO: refactor to check paths in order.
   # Discussion here: https://github.com/artsy/force/pull/1126
@@ -16,7 +16,7 @@ routes =
   ^/auction/[^/]+/?$
   /auction/.*/confirm-registration
   /auction/.*/registration-flow
-  ''': require('../apps/auction/client.js').default
+  ''': require('../apps/auction/client.tsx').init
 
   '''
   /artist/.*/auction-results
