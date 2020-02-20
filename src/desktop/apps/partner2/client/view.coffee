@@ -53,7 +53,7 @@ module.exports = class PartnerView extends Backbone.View
     # Otherwise, we can just go ahead and render the content.
     return unless @isPartnerFetched or @currentSection isnt 'overview'
     new sectionToView[@currentSection]?( _.extend(
-      el: @$('.partner2-content')
+      el: @$('#partner2-content')
       profile: @profile
       partner: @partner
       cache: @cache[@currentSection]

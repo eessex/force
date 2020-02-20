@@ -1,15 +1,10 @@
 _ = require 'underscore'
+React = require 'react'
+ReactDOM = require 'react-dom'
 ArticlesGridView = require '../../../components/articles_grid/view.coffee'
-ArticleView = require '../../../components/article/client/view.coffee'
 Articles = require '../../../collections/articles.coffee'
-Article = require '../../../models/article.coffee'
-articleTemplate = -> require('../../../components/article/templates/index.jade') arguments...
-sd = require('sharify').data
-{ resize } = require '../../../components/resizer/index.coffee'
-embed = require 'particle'
-moment = require 'moment'
-jsonldTemplate = -> require('../../../components/main_layout/templates/json_ld.jade') arguments...
-{ stringifyJSONForWeb } = require '../../../components/util/json.coffee'
+{ fetchArticle } = require("desktop/apps/article/helpers.tsx")
+{ ClassicArticleLayout } = require("desktop/apps/article/components/layouts/Classic.tsx")
 
 module.exports = class ArticlesAdapter
   constructor: ({ @profile, @partner, @cache, @el }) ->
@@ -32,28 +27,18 @@ module.exports = class ArticlesAdapter
 
   renderArticle: ->
     slug = _.last window.location.pathname.split('/')
-    new Article(id: slug).fetch
-      success: (article) =>
-        @el.html articleTemplate
-          article: article
-          resize: resize
-          embed: embed
-          moment: moment
-        @el.append("<div class='article-footer'></div>")
-        @el.append jsonldTemplate
-          jsonLD: stringifyJSONForWeb article.toJSONLD()
-        new ArticleView
-          el: @el
-          article: article
-        @collection = new Articles
-        @collection.url = "#{@collection.url}/?channel_id=#{@partner.get('_id')}&published=true&limit=6&sort=-published_at"
-        new ArticlesGridView
-          el: @el.children('.article-footer')
-          collection: @collection
-          partner: @partner
-          header: "More From #{@partner.displayName()}"
-          hideMore: true
-          article: article
-        @collection.fetch()
-      error: (err) =>
-        window.location.replace @partner.href()
+    article = fetchArticle(
+      slug,
+      () => window.location.replace @partner.href()
+    ).then((article) =>
+      article.channel = {
+        name: @partner.displayName()
+      }
+      ReactDOM.render(
+        React.createElement(
+          ClassicArticleLayout,
+          { article }
+        ),
+        document.getElementById('partner2-content')
+      )
+    )

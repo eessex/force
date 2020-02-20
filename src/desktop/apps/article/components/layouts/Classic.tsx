@@ -8,9 +8,11 @@ const Articles = require("desktop/collections/articles.coffee")
 
 export class ClassicArticleLayout extends React.Component<AppProps> {
   componentDidMount() {
-    const { article } = this.props
+    const {
+      article: { channel_id, partner_channel_id },
+    } = this.props
 
-    if (article.channel_id) {
+    if (channel_id || partner_channel_id) {
       this.setupFooterArticles()
     }
   }
@@ -31,7 +33,7 @@ export class ClassicArticleLayout extends React.Component<AppProps> {
         published: true,
         sort: "-published_at",
         limit: 12,
-        channel_id: article.channel_id,
+        channel_id: article.channel_id || article.partner_channel_id,
       },
     })
   }

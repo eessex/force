@@ -3,6 +3,8 @@ import { ModalOptions } from "@artsy/reaction/dist/Components/Authentication/Typ
 const { stringifyJSONForWeb } = require("desktop/components/util/json.coffee")
 const Article = require("desktop/models/article.coffee")
 const mediator = require("desktop/lib/mediator.coffee")
+import ArticleQuery from "desktop/apps/article/queries/article"
+import { positronql } from "desktop/lib/positronql"
 
 // Helper method to determine how frequently ads should be rendered in Article components
 export const shouldAdRender = (
@@ -82,4 +84,18 @@ export const handleOpenAuthModal = (mode, options: ArticleModalOptions) => {
     mode,
     ...options,
   })
+}
+
+export const fetchArticle = async (
+  articleId: string,
+  err?: (e: Error) => void
+) => {
+  try {
+    const { article } = await positronql({
+      query: ArticleQuery(articleId),
+    })
+    return article
+  } catch (e) {
+    err && err(e)
+  }
 }
