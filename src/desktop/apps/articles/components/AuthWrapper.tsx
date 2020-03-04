@@ -3,6 +3,9 @@ import { data as sd } from "sharify"
 import qs from "querystring"
 import Waypoint from "react-waypoint"
 import { once } from "lodash"
+import { ModalType } from "@artsy/reaction/dist/Components/Authentication/Types"
+import { handleOpenAuthModal } from "desktop/apps/authentication/helpers"
+
 const Cookies = require("desktop/components/cookies/index.coffee")
 const mediator = require("desktop/lib/mediator.coffee")
 
@@ -37,10 +40,9 @@ export class AuthWrapper extends React.Component {
   }
 
   onOpenModal = () => {
-    mediator.trigger("open:auth", {
-      mode: "signup",
+    handleOpenAuthModal(ModalType.signup, {
+      mode: ModalType.signup,
       intent: "Viewed editorial",
-      signupIntent: "signup",
       trigger: "timed",
       triggerSeconds: 2,
       copy: "Sign up for the Best Stories in Art and Visual Culture",
