@@ -5,10 +5,8 @@ import React, { Component, Fragment } from "react"
 import { flatten, debounce, once } from "lodash"
 import Waypoint from "react-waypoint"
 import { positronql } from "desktop/lib/positronql"
-import {
-  ModalOptions,
-  ModalType,
-} from "@artsy/reaction/dist/Components/Authentication/Types"
+import { ModalType } from "@artsy/reaction/dist/Components/Authentication/Types"
+import { handleOpenAuthModal } from "desktop/apps/authentication/helpers"
 import { newsArticlesQuery } from "desktop/apps/article/queries/articles"
 import {
   ArticleData,
@@ -20,11 +18,6 @@ import { NewsArticle } from "./NewsArticle"
 import { NewsDateDivider } from "reaction/Components/Publishing/News/NewsDateDivider"
 import { shouldAdRender } from "desktop/apps/article/helpers"
 const Cookies = require("desktop/components/cookies/index.coffee")
-const mediator = require("desktop/lib/mediator.coffee")
-
-interface ArticleModalOptions extends ModalOptions {
-  signupIntent: string
-}
 
 export interface Props {
   article?: ArticleData
@@ -235,10 +228,8 @@ export class InfiniteScrollNewsArticle extends Component<Props, State> {
       "scroll",
       once(() => {
         setTimeout(() => {
-          this.handleOpenAuthModal("register", {
-            mode: ModalType.signup,
+          handleOpenAuthModal(ModalType.signup, {
             intent: "Viewed editorial",
-            signupIntent: "signup",
             trigger: "timed",
             triggerSeconds: 2,
             copy: "Sign up for the Best Stories in Art and Visual Culture",
@@ -246,18 +237,11 @@ export class InfiniteScrollNewsArticle extends Component<Props, State> {
             afterSignUpAction: {
               action: "editorialSignup",
             },
-          } as any)
+          })
         }, 2000)
       }),
       { once: true }
     )
-  }
-
-  handleOpenAuthModal = (mode, options: ArticleModalOptions) => {
-    mediator.trigger("open:auth", {
-      mode,
-      ...options,
-    })
   }
 
   render() {

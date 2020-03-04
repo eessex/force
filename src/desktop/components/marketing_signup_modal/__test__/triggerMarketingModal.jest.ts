@@ -66,7 +66,6 @@ describe("MarketingSignupModal", () => {
         image: "http://files.artsy.net/images/fair.jpg",
         intent: "signup",
         mode: "signup",
-        signupIntent: "signup",
       })
     })
 
@@ -82,7 +81,6 @@ describe("MarketingSignupModal", () => {
         image: "http://files.artsy.net/images/art.jpg",
         intent: "signup",
         mode: "signup",
-        signupIntent: "signup",
       })
     })
 
@@ -96,7 +94,6 @@ describe("MarketingSignupModal", () => {
         image: "http://files.artsy.net/images/fair.jpg",
         intent: "signup",
         mode: "signup",
-        signupIntent: "signup",
         trigger: "scroll",
         triggerSeconds: 2,
       })
@@ -110,7 +107,6 @@ describe("MarketingSignupModal", () => {
         image: "http://files.artsy.net/images/fair.jpg",
         intent: "signup",
         mode: "signup",
-        signupIntent: "signup",
       })
     })
   })
@@ -130,7 +126,6 @@ describe("MarketingSignupModal", () => {
         image: "http://files.artsy.net/images/art.jpg",
         intent: "signup",
         mode: "signup",
-        signupIntent: "signup",
         trigger: "scroll",
         triggerSeconds: 2,
       })
@@ -162,7 +157,6 @@ describe("MarketingSignupModal", () => {
         image: "http://files.artsy.net/images/art.jpg",
         intent: "signup",
         mode: "signup",
-        signupIntent: "signup",
       })
     })
   })

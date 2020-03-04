@@ -1,8 +1,8 @@
 import { get } from "lodash"
 import { data as sd } from "sharify"
-
+import { handleOpenAuthModal } from "desktop/apps/authentication/helpers"
+import { ModalType } from "@artsy/reaction/dist/Components/Authentication/Types"
 const metaphysics = require("lib/metaphysics.coffee")
-const mediator = require("desktop/lib/mediator.coffee")
 
 export const query = `
 query ArtistCTAQuery($artistID: String!) {
@@ -34,13 +34,9 @@ export const setupArtistSignUpModal = () => {
           "scroll",
           () => {
             setTimeout(() => {
-              mediator.trigger("open:auth", {
-                copy: `Join Artsy to discover new works by ${
-                  artistData.name
-                } and more artists you love`,
-                mode: "signup",
+              handleOpenAuthModal(ModalType.signup, {
+                copy: `Join Artsy to discover new works by ${artistData.name} and more artists you love`,
                 intent: "signup",
-                signupIntent: "signup",
                 trigger: "scroll",
                 triggerSeconds: 4,
                 destination: location.href,

@@ -1,7 +1,8 @@
 import { data as sd } from "sharify"
 import qs from "querystring"
 import { findWhere } from "underscore"
-const mediator = require("desktop/lib/mediator.coffee")
+import { handleOpenAuthModal } from "desktop/apps/authentication/helpers"
+import { ModalType } from "@artsy/reaction/dist/Components/Authentication/Types"
 
 interface ModalData {
   image: string
@@ -32,11 +33,9 @@ export const scrollingMarketingModal = (modalData: ModalData) => {
       () => {
         setTimeout(() => {
           const { image, copy } = modalData
-          mediator.trigger("open:auth", {
+          handleOpenAuthModal(ModalType.signup, {
             copy,
-            mode: "signup",
             intent: "signup",
-            signupIntent: "signup",
             trigger: "scroll",
             triggerSeconds: 2,
             destination: location.href,
@@ -51,11 +50,9 @@ export const scrollingMarketingModal = (modalData: ModalData) => {
 
 export const staticMarketingModal = (modalData: ModalData) => {
   const { image, copy } = modalData
-  mediator.trigger("open:auth", {
+  handleOpenAuthModal(ModalType.signup, {
     copy,
-    mode: "signup",
     intent: "signup",
-    signupIntent: "signup",
     destination: location.href,
     image,
   })
