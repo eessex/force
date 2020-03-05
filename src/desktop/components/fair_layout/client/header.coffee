@@ -24,7 +24,6 @@ module.exports = class FairHeaderView extends Backbone.View
       mode: 'signup',
       destination: location.href
       intent: 'signup'
-      signupIntent: 'signup'
       trigger: 'click'
       contextModule: 'Header'
 
@@ -34,7 +33,6 @@ module.exports = class FairHeaderView extends Backbone.View
       mode: 'login'
       trigger: 'click'
       intent: 'login'
-      signupIntent: 'login'
       contextModule: 'Header'
       destination: location.href
 

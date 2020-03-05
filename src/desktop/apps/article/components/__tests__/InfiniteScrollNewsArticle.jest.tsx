@@ -10,6 +10,7 @@ import moment from "moment"
 import Waypoint from "react-waypoint"
 import { SystemContextProvider } from "@artsy/reaction/dist/Artsy"
 const fixtures = require("desktop/test/helpers/fixtures.coffee")
+import { ModalOptions } from "@artsy/reaction/dist/Components/Authentication/Types"
 
 jest.mock("desktop/lib/positronql", () => ({
   positronql: jest.fn(),
@@ -178,10 +179,8 @@ describe("InfiniteScrollNewsArticle", () => {
     component.update()
     window.dispatchEvent(new Event("scroll"))
 
-    const registerOptions = {
-      mode: "signup",
+    const registerOptions: ModalOptions = {
       intent: "Viewed editorial",
-      signupIntent: "signup",
       trigger: "timed",
       triggerSeconds: 2,
       copy: "Sign up for the Best Stories in Art and Visual Culture",

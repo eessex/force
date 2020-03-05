@@ -36,7 +36,6 @@ module.exports = class SaleArtworkView extends Backbone.View
         mode: 'signup'
         copy: 'Sign up to bid'
         intent: 'bid'
-        signupIntent: 'bid'
         trigger: 'click'
         redirectTo: @sale.redirectUrl @model
 

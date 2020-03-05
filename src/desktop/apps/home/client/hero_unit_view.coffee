@@ -96,7 +96,6 @@ module.exports = class HeroUnitView extends Backbone.View
     mediator.trigger 'open:auth',
       mode: 'signup',
       intent: 'signup'
-      signupIntent: 'signup'
       trigger: 'click'
       context_module: 'Homepage banner'
       destination: location.href

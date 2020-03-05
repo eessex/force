@@ -86,6 +86,5 @@ module.exports = class FeatureView extends Backbone.View
         mode: 'signup'
         copy: 'Sign up to bid on artworks'
         redirectTo: @sale.registerUrl()
-        signupIntent: 'bid'
         intent: 'bid'
         trigger: 'click'

@@ -34,7 +34,6 @@ module.exports = class ArtworkSaveView extends Backbone.View
           objectId: @id
         }
         intent: 'save artwork'
-        signupIntent: 'save artwork'
         trigger: 'click'
         destination: location.href
 

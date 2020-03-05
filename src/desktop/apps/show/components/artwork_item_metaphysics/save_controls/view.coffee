@@ -32,7 +32,6 @@ module.exports = class SaveControls extends Backbone.View
         mode: 'signup'
         copy: 'Sign up to save artworks'
         intent: 'save artwork'
-        signupIntent: 'save artwork'
         trigger: 'click'
         destination: location.href
         afterSignUpAction: {

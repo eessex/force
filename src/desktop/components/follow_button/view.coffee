@@ -62,7 +62,6 @@ module.exports = class FollowButton extends Backbone.View
           objectId: @model.id
         }
         intent: "follow #{@modelName}"
-        signupIntent: "follow #{@modelName}"
       return false
 
     # remove null values

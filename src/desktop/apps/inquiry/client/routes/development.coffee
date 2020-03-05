@@ -51,7 +51,6 @@ module.exports = ->
       mode: 'login'
       trigger: 'click'
       intent: 'inquire'
-      signupIntent: 'inquire'
       redirectTo: location.href
 
   $('.js-logout').click (e) ->

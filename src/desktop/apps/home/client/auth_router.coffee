@@ -37,7 +37,6 @@ module.exports = class HomeAuthRouter extends Backbone.Router
       mediator.trigger 'open:auth',
         mode: 'login'
         intent: 'login'
-        signupIntent: 'login'
         trigger: 'timed'
         triggerSeconds: 0
         redirectTo: redirectTo
@@ -49,7 +48,6 @@ module.exports = class HomeAuthRouter extends Backbone.Router
         mode: 'login'
         redirectTo: redirectTo
         intent: 'login'
-        signupIntent: 'login'
         trigger: 'timed'
         triggerSeconds: 0
 
@@ -59,7 +57,6 @@ module.exports = class HomeAuthRouter extends Backbone.Router
       mode: 'signup',
       redirectTo: if redirectTo then redirectTo else null
       intent: 'signup'
-      signupIntent: 'signup'
       trigger: 'timed'
       triggerSeconds: 0
 
@@ -73,7 +70,6 @@ module.exports = class HomeAuthRouter extends Backbone.Router
       setPassword: setPassword,
       redirectTo: redirectTo
       intent: 'forgot'
-      signupIntent: 'forgot'
       trigger: 'timed'
       triggerSeconds: 0
 

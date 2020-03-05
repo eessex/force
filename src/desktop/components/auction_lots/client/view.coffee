@@ -61,7 +61,6 @@ module.exports = class AuctionResultsView extends Backbone.View
       copy: 'Sign up to see full auction records — for free'
       trigger: 'click'
       intent: 'view auction results'
-      signupIntent: 'view auction results'
       destination: location.href
 
   onRowClick: (e) =>

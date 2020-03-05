@@ -49,7 +49,6 @@ module.exports.FairsView = class FairsView extends Backbone.View
       mode: 'signup'
       copy: "Sign up to follow fairs"
       intent: 'signup'
-      signupIntent: 'signup'
       destination: location.href
       trigger: 'click'
 
@@ -57,7 +56,7 @@ module.exports.FairsView = class FairsView extends Backbone.View
     @$('#fairs-see-more').removeClass 'is-loading'
     @$('#fairs-see-more').hide() if fairs.length < 40
     @$('.fairs__past-fairs-list').append pastFairsTemplate
-      pastFairs: _.filter(fairs, (fair) => ViewHelpers.isPast(fair))
+      pastFairs: _.filter(fairs, (fair) -> ViewHelpers.isPast(fair))
       ViewHelpers: ViewHelpers
 
     @setupFollows fairs

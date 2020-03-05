@@ -177,7 +177,7 @@ export function getRedirect(type): URL {
   }
 }
 
-export const handleOpenAuthModal = (mode, options: ModalOptions) => {
+export const handleOpenAuthModal = (mode: ModalType, options: ModalOptions) => {
   mediator.trigger("open:auth", {
     mode,
     ...options,

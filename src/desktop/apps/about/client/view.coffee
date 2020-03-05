@@ -37,7 +37,6 @@ module.exports = class AboutView extends Backbone.View
     mediator.trigger 'open:auth',
       mode: 'signup',
       intent: 'save artwork'
-      signupIntent: 'save artwork'
       trigger: 'click',
       destination: location.href
 

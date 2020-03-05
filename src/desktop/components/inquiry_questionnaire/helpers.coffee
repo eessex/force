@@ -21,7 +21,6 @@ module.exports =
   fbSignup: (e) ->
     e.preventDefault()
     queryData =
-      'signup-intent': @signupIntent
       'signup-referer': @signupReferer
       'redirect-to': @afterAuthPath
     queryString = $.param(queryData)
