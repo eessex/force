@@ -74,7 +74,7 @@ export const handleSubmit = (
             }
             break
         }
-
+        console.log("tracking", properties)
         analytics.track(properties)
       }
 
