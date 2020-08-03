@@ -78,6 +78,7 @@ export const LoggedInActions: React.FC<
             <SoloIcon
               fill={hover ? "purple100" : "black80"}
               title="Your account"
+              data-test="account"
             />
           )
         }}
