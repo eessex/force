@@ -32,6 +32,7 @@ import { TrackingProp } from "react-tracking"
 import { Media } from "v2/Utils/Responsive"
 import { AnalyticsContext } from "v2/Artsy/Analytics/AnalyticsContext"
 import { OwnerType } from "@artsy/cohesion"
+import { useSystemContext } from "@artsy/reaction/dist/Artsy"
 
 export interface Props {
   artwork: ArtworkApp_artwork
@@ -304,7 +305,6 @@ export const ArtworkAppFragmentContainer = createFragmentContainer(
         location: { pathname, state },
       },
     } = useContext(RouterContext)
-
     // Check to see if referrer comes from link interception.
     // @see interceptLinks.ts
     const referrer = state && state.previousHref

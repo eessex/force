@@ -19,5 +19,10 @@ export const buildServerAppContext = (
   user: req.user && req.user.toJSON(),
   isEigen: res.locals.sd.EIGEN,
   mediator,
+  analyticsContext: getAnalyticsContext(res),
   ...context,
 })
+
+const getAnalyticsContext = (res) => {
+  console.log(res.data)
+}

@@ -12,6 +12,7 @@ import Events from "v2/Utils/Events"
 import { getENV } from "v2/Utils/getENV"
 import { ErrorBoundary } from "./ErrorBoundary"
 import { FocusVisible } from "v2/Components/FocusVisible"
+import { AnalyticsContext } from "v2/Artsy/Analytics/AnalyticsContext"
 
 import {
   MatchingMediaQueries,
@@ -65,21 +66,25 @@ export const Boot = track(null, {
         <StateProvider>
           <SystemContextProvider {...contextProps}>
             <ErrorBoundary>
-              <MediaContextProvider onlyMatch={onlyMatchMediaQueries}>
-                <ResponsiveProvider
-                  mediaQueries={themeProps.mediaQueries}
-                  initialMatchingMediaQueries={onlyMatchMediaQueries as any}
-                >
-                  <Grid fluid maxWidth="100%">
-                    <GlobalStyles />
-                    <FocusVisible />
-                    {children}
-                    {process.env.NODE_ENV === "development" && (
-                      <BreakpointVisualizer />
-                    )}
-                  </Grid>
-                </ResponsiveProvider>
-              </MediaContextProvider>
+              <AnalyticsContext.Provider
+                value={contextProps.analyticsContext}
+              >
+                <MediaContextProvider onlyMatch={onlyMatchMediaQueries}>
+                  <ResponsiveProvider
+                    mediaQueries={themeProps.mediaQueries}
+                    initialMatchingMediaQueries={onlyMatchMediaQueries as any}
+                  >
+                    <Grid fluid maxWidth="100%">
+                      <GlobalStyles />
+                      <FocusVisible />
+                      {children}
+                      {process.env.NODE_ENV === "development" && (
+                        <BreakpointVisualizer />
+                      )}
+                    </Grid>
+                  </ResponsiveProvider>
+                </MediaContextProvider>
+              </AnalyticsContext.Provider>
             </ErrorBoundary>
           </SystemContextProvider>
         </StateProvider>

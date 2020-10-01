@@ -6,14 +6,24 @@ import { data as sd } from "sharify"
 import { artworkClient } from "./apps/artwork/artworkClient"
 import { artistClient } from "./apps/artist/artistClient"
 import { loadableReady } from "@loadable/component"
+import { AnalyticsContextProps } from "v2/Artsy/Analytics/AnalyticsContext"
+import { OwnerType } from "@artsy/cohesion"
 
 const mediator = require("desktop/lib/mediator.coffee")
+
+const pageType = 'fixme'
+
+const analyticsContext: AnalyticsContextProps = {
+  contextPageOwnerType: OwnerType[pageType],
+  contextPageOwnerSlug: ''
+}
 
 buildClientApp({
   routes: getAppRoutes(),
   context: {
     user: sd.CURRENT_USER,
     mediator,
+    analyticsContext
   } as any,
 })
   .then(({ ClientApp }) => {

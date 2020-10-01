@@ -11,6 +11,8 @@ import { artistMiddleware } from "./apps/artist/artistMiddleware"
 import { userRequiredMiddleware } from "./middleware/userRequiredMiddleware"
 import { searchMiddleware } from "./apps/search/searchMiddleware"
 import { handleCollectionToArtistSeriesRedirect } from "./apps/collection/collectionMiddleware"
+import { AnalyticsContextProps } from "v2/Artsy/Analytics/AnalyticsContext"
+import { OwnerType } from "@artsy/cohesion"
 
 export const app = express()
 
@@ -61,6 +63,11 @@ app.get(
       const pageParts = req.path.split("/")
       const pageType = pageParts[1]
 
+      const analyticsContext: AnalyticsContextProps = {
+        contextPageOwnerType: OwnerType[pageType],
+        contextPageOwnerSlug: "",
+      }
+
       const {
         status,
         styleTags,
@@ -69,7 +76,7 @@ app.get(
         bodyHTML,
         headTags,
       } = await buildServerApp({
-        context: buildServerAppContext(req, res),
+        context: buildServerAppContext(req, res, { analyticsContext }),
         routes: getAppRoutes(),
         url: req.url,
         userAgent: req.header("User-Agent"),
