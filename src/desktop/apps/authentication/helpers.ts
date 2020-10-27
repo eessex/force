@@ -10,8 +10,9 @@ import {
   resetYourPassword,
   successfullyLoggedIn,
 } from "@artsy/cohesion"
-import { omit } from "lodash"
+import { pick } from "lodash"
 import { mediator } from "lib/mediator"
+import Events from "v2/Utils/Events"
 
 const LoggedOutUser = require("desktop/models/logged_out_user.coffee")
 
@@ -38,6 +39,7 @@ export const handleSubmit = (
    */
   const userAttributes = Object.assign({}, values, {
     _csrf: Cookies && Cookies.get && Cookies.get("CSRF_TOKEN"),
+    session_id: sd.SESSION_ID,
     signupIntent: intent,
     signupReferer,
     agreed_to_receive_emails: values.accepted_terms_of_service,
@@ -46,7 +48,7 @@ export const handleSubmit = (
   user.set(userAttributes)
 
   const options = {
-    success: async (_, res) => {
+    success: async res => {
       formikBag.setSubmitting(false)
       const analytics = (window as any).analytics
 
@@ -76,10 +78,7 @@ export const handleSubmit = (
             analyticsOptions = resetYourPassword(options)
             break
         }
-        analytics.track(
-          analyticsOptions.action,
-          omit(analyticsOptions, "action")
-        )
+        Events.postEvent(analyticsOptions)
       }
 
       let afterAuthURL: URL
@@ -93,8 +92,8 @@ export const handleSubmit = (
 
       window.location.assign(result.href)
     },
-    error: (_, res) => {
-      const error = res.responseJSON
+    error: err => {
+      const error = err.responseJSON || err
       formikBag.setStatus(error)
       formikBag.setSubmitting(false)
       mediator.trigger("auth:error", error.message)
@@ -103,7 +102,7 @@ export const handleSubmit = (
 
   switch (type) {
     case ModalType.login:
-      user.login(options)
+      loginUser(userAttributes, options)
       break
     case ModalType.signup:
       user.signup(options)
@@ -181,4 +180,43 @@ export function getRedirect(type): URL {
     default:
       return new URL(window.location.href, appBaseURL)
   }
+}
+
+export const loginUser = async (
+  userAttributes: any,
+  options: {
+    success: (res: any) => Promise<void>
+    error: (err: any) => void
+  }
+) => {
+  const url = `${sd.APP_URL}${sd.AP.loginPagePath}`
+  const user = pick(userAttributes, [
+    "email",
+    "password",
+    "otp_attempt",
+    "session_id",
+    "_csrf",
+  ])
+
+  await fetch(url, {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "X-Requested-With": "XMLHttpRequest",
+    },
+    method: "POST",
+    credentials: "same-origin",
+    body: JSON.stringify(user),
+  })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        options.success(data)
+      } else {
+        options.error(data)
+      }
+    })
+    .catch(error => {
+      console.error("Error:", error)
+    })
 }
