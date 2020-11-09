@@ -3,13 +3,14 @@ Backbone = require 'backbone'
 StepView = require './step.coffee'
 Form = require '../../form/index.coffee'
 FormMixin = require '../../mixins/form'
-FormErrorHelpers = require '../helpers'
+FormErrorHelpers = require '../form_error_helpers'
 sd = require('sharify').data
 templates =
   register: -> require('../templates/account/register.jade') arguments...
   login: -> require('../templates/account/login.jade') arguments...
   forgot: -> require('../templates/account/forgot.jade') arguments...
 { recaptcha } = require "../../../../v2/Utils/recaptcha"
+{ getTrackingOptions } = require("../helpers")
 
 { mediator } = require('../../../../lib/mediator')
 
@@ -25,6 +26,8 @@ module.exports = class Account extends StepView
     'click button': 'onSubmit'
     'click .js-mode': 'change'
     'click .js-iq-save-skip': 'next'
+    'click .js-login-email': 'trackLoginClick'
+    'click .js-forgot-password': 'trackForgotClick'
 
   initialize: ({ @user, @inquiry, @artwork, @state, @modal }) ->
     @modal?.dialog 'bounce-in'
@@ -105,3 +108,11 @@ module.exports = class Account extends StepView
   change: (e) ->
     e.preventDefault()
     @active.set 'mode', $(e.currentTarget).data 'mode'
+
+  trackLoginClick: (e) ->
+    options = getTrackingOptions()
+    window.analytics.track('inquiry_questionnaire: Clicked "Log in"', {}, options)
+
+  trackForgotClick: (e) ->
+    options = getTrackingOptions()
+    window.analytics.track('inquiry_questionnaire: Clicked "Forgot Password?"', {}, options)

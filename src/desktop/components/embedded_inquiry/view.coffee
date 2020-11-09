@@ -5,7 +5,7 @@ Form = require '../form/index.coffee'
 User = require '../../models/user.coffee'
 ArtworkInquiry = require '../../models/artwork_inquiry.coffee'
 defaultMessage = require '../contact/default_message.coffee'
-openInquiryQuestionnaireFor = require '../inquiry_questionnaire/index.coffee'
+{ openInquiryQuestionnaireFor } = require '../inquiry_questionnaire/index.ts'
 template = -> require('./templates/index.jade') arguments...
 confirmation = -> require('./templates/confirmation.jade') arguments...
 

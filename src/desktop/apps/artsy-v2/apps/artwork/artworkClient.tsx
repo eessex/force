@@ -15,7 +15,8 @@ export const artworkClient = () => {
   const User = require("desktop/models/user.coffee")
   const Artwork = require("desktop/models/artwork.coffee")
   const ArtworkInquiry = require("desktop/models/artwork_inquiry.coffee")
-  const openInquiryQuestionnaireFor = require("desktop/components/inquiry_questionnaire/index.coffee")
+  const openInquiryQuestionnaireFor = require("desktop/components/inquiry_questionnaire/index")
+    .openInquiryQuestionnaireFor
   const openAuctionBuyerPremium = require("desktop/components/artworkBuyersPremium/index.coffee")
   const ViewInRoomView = require("desktop/components/view_in_room/view.coffee")
   const openMultiPageModal = require("desktop/components/multi_page_modal/index.coffee")

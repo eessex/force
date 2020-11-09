@@ -1,6 +1,7 @@
 _ = require 'underscore'
 { underscored } = require 'underscore.string'
 analyticsHooks = require '../../lib/analytics_hooks.coffee'
+require('./analytics.ts')
 
 module.exports =
   # Select eventable objects you want to proxy

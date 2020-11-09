@@ -1,4 +1,3 @@
-import { data as sd } from "sharify"
 import {
   ContextModule,
   Intent,
@@ -8,10 +7,9 @@ import {
 import $ from "jquery"
 import { omit } from "lodash"
 const analyticsHooks = require("desktop/lib/analytics_hooks.coffee")
-const analytics = window.analytics
+
 ;(function () {
   "use strict"
-
   let namespace, track, trackWithoutNamespace, bind, bindOnce
 
   function getTrackingOptions() {
@@ -38,11 +36,11 @@ const analytics = window.analytics
 
   track = function (event, props = {}) {
     event = namespace(" " + event)
-    analytics.track(event, props, getTrackingOptions())
+    window.analytics.track(event, props, getTrackingOptions())
   }
 
   trackWithoutNamespace = function (event, props = {}) {
-    analytics.track(event, props, getTrackingOptions())
+    window.analytics.track(event, props, getTrackingOptions())
   }
 
   bind = function (name, handler) {
@@ -60,12 +58,12 @@ const analytics = window.analytics
   // DOM events
   let $document = $(document)
 
-  $document.on("click", ".js-choice", function () {
-    let choice = $(this).data("value")
-    track("Clicked on how_can_we_help option", {
-      choice: choice,
-    })
-  })
+  // $document.on("click", ".js-choice", function () {
+  //   let choice = $(this).data("value")
+  //   track("Clicked on how_can_we_help option", {
+  //     choice: choice,
+  //   })
+  // })
 
   $document.on("click", ".js-iq-collector-level", function (e) {
     track('Clicked "Yes" or "No" button on commercial_interest', {
@@ -73,13 +71,13 @@ const analytics = window.analytics
     })
   })
 
-  $document.on("click", ".js-login-email", function () {
-    track('Clicked "Log in"')
-  })
+  // $document.on("click", ".js-login-email", function () {
+  //   track('Clicked "Log in"')
+  // })
 
-  $document.on("click", ".js-forgot-password", function () {
-    track('Clicked "Forgot Password?"')
-  })
+  // $document.on("click", ".js-forgot-password", function () {
+  //   track('Clicked "Forgot Password?"')
+  // })
 
   $document.on("click", ".js-send-inquiry", function () {
     track('Clicked "Send" on inquiry form')
@@ -98,15 +96,15 @@ const analytics = window.analytics
   })
 
   // Proxied events
-  bind("modal:opened", function (context) {
+  bind("modal:opened", function (_context) {
     track("Opened inquiry flow")
   })
 
-  bind("modal:closed", function (context) {
+  bind("modal:closed", function (_context) {
     track("Closed inquiry flow")
   })
 
-  bind("state:completed", function (context) {
+  bind("state:completed", function (_context) {
     track("Completed inquiry flow")
   })
 
@@ -237,15 +235,15 @@ const analytics = window.analytics
     })
   })
 
-  bindOnce("contact:hover", function (context) {
+  bindOnce("contact:hover", function (_context) {
     trackWithoutNamespace("Hovered over contact form 'Send' button")
   })
 
-  bindOnce("contact:close-x", function (context) {
+  bindOnce("contact:close-x", function (_context) {
     trackWithoutNamespace("Closed the inquiry form via the '×' button")
   })
 
-  bindOnce("contact:close-back", function (context) {
+  bindOnce("contact:close-back", function (_context) {
     trackWithoutNamespace(
       "Closed the inquiry form by clicking the modal window backdrop"
     )

@@ -65,6 +65,7 @@ declare module "sharify" {
       ARTSY_XAPP_TOKEN: string
       ARTWORK?: any // mobile artist app data
       AUCTION?: any
+      COMMERCIAL?: any // artwork inquiry form
       CSRF_TOKEN: string
       CHANNEL?: { slug?: string } // Articles
       FAIR?: any // mobile fair app data
