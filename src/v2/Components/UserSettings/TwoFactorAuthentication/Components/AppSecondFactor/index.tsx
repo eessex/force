@@ -16,9 +16,9 @@ import { useSystemContext } from "v2/Artsy"
 import { AppSecondFactorModal } from "./Modal"
 import { ApiError } from "../../ApiError"
 import { ApiErrorModal } from "../ApiErrorModal"
-import { DisableSecondFactor } from "../Mutation/DisableSecondFactor"
+// import { DisableSecondFactor } from "../Mutation/DisableSecondFactor"
 import { CreateAppSecondFactor } from "./Mutation/CreateAppSecondFactor"
-import { DisableFactorConfirmation } from "../DisableFactorConfirmation"
+import { DisableFactorConfirmationFragmentContainer as DisableFactorConfirmation } from "../DisableFactorConfirmation"
 
 import { AppSecondFactor_me } from "v2/__generated__/AppSecondFactor_me.graphql"
 
@@ -88,25 +88,27 @@ export const AppSecondFactor: React.FC<AppSecondFactorProps> = props => {
     setCreating(false)
   }
 
-  async function disableSecondFactor() {
-    setShowConfirmDisable(false)
-    setDisabling(true)
+  function disableSecondFactor(password: string, onError: (err) => void) {
+    // setShowConfirmDisable(false)
+    // setDisabling(true)
+    // if (me.appSecondFactors[0].__typename !== "AppSecondFactor") {
+    //   return
+    // }
 
-    if (me.appSecondFactors[0].__typename !== "AppSecondFactor") {
-      return
-    }
 
-    try {
-      await DisableSecondFactor(relayEnvironment, {
-        secondFactorID: me.appSecondFactors[0].internalID,
-      })
+      // await DisableSecondFactor(relayEnvironment, {
+      //   password,
+      //   secondFactorID: me.appSecondFactors[0].internalID
+      // })
+      debugger
       relayRefetch.refetch({}, {}, () => {
         setDisabling(false)
       })
-    } catch (error) {
-      setDisabling(false)
-      handleMutationError(error)
-    }
+
+      // debugger
+      // setDisabling(false)
+      // onError(error)
+    // }
   }
 
   const DisableButton = props => (

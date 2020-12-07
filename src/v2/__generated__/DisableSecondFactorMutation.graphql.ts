@@ -21,6 +21,7 @@ export type DisableSecondFactorMutationResponse = {
             readonly errors: ReadonlyArray<{
                 readonly message: string;
                 readonly code: string;
+                readonly data: unknown | null;
             }>;
         } | {
             /*This will never be '%other', but we need some
@@ -40,6 +41,7 @@ export type DisableSecondFactorMutationRawResponse = {
             readonly errors: ReadonlyArray<{
                 readonly message: string;
                 readonly code: string;
+                readonly data: unknown | null;
             }>;
         } | {
             readonly __typename: string | null;
@@ -72,6 +74,7 @@ mutation DisableSecondFactorMutation(
         errors {
           message
           code
+          data
         }
       }
     }
@@ -139,6 +142,13 @@ v6 = {
           "args": null,
           "kind": "ScalarField",
           "name": "code",
+          "storageKey": null
+        },
+        {
+          "alias": null,
+          "args": null,
+          "kind": "ScalarField",
+          "name": "data",
           "storageKey": null
         }
       ],
@@ -221,9 +231,9 @@ return {
     "metadata": {},
     "name": "DisableSecondFactorMutation",
     "operationKind": "mutation",
-    "text": "mutation DisableSecondFactorMutation(\n  $input: DisableSecondFactorInput!\n) {\n  disableSecondFactor(input: $input) {\n    secondFactorOrErrors {\n      __typename\n      ... on AppSecondFactor {\n        __typename\n      }\n      ... on SmsSecondFactor {\n        __typename\n      }\n      ... on Errors {\n        __typename\n        errors {\n          message\n          code\n        }\n      }\n    }\n  }\n}\n"
+    "text": "mutation DisableSecondFactorMutation(\n  $input: DisableSecondFactorInput!\n) {\n  disableSecondFactor(input: $input) {\n    secondFactorOrErrors {\n      __typename\n      ... on AppSecondFactor {\n        __typename\n      }\n      ... on SmsSecondFactor {\n        __typename\n      }\n      ... on Errors {\n        __typename\n        errors {\n          message\n          code\n          data\n        }\n      }\n    }\n  }\n}\n"
   }
 };
 })();
-(node as any).hash = 'bdacff640561201d956f43229eaf2b1c';
+(node as any).hash = '68fdb5e2aad5f51ca3bea41f5d6ef796';
 export default node;
